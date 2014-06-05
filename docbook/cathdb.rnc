@@ -1,0 +1,118 @@
+default namespace db = "http://docbook.org/ns/docbook"
+
+include "http://docbook.org/xml/publishers/1.0/rng/publishers.rnc"
+   {
+      db.publishing.inlines |= cathdb.milestone
+
+      db.toplevel.blocks.or.sections =
+         ((db.all.blocks | cathdb.statute)*, db.toplevel.sections?) | db.toplevel.sections
+      
+      db.recursive.blocks.or.sections =
+         ((db.all.blocks | cathdb.statute)*, db.recursive.sections?) | db.recursive.sections
+      
+      db.article = 
+        element article {
+          db.article.attlist,
+          db.article.info,
+          (db.navigation.components | db.appendix | db.acknowledgements | db.colophon)*,
+          (((db.all.blocks | cathdb.statute)*, db.article.components?) | db.article.components),
+          (db.navigation.components | db.appendix | db.acknowledgements | db.colophon)*
+        }
+        
+      db.part =
+        element part {
+          db.part.attlist, db.part.info, db.partintro?, (db.part.components+ | (db.part.components*, cathdb.division+))
+        }
+      
+      db.simplesect =
+        element simplesect {
+          db.simplesect.attlist, db.simplesect.info, (db.all.blocks | cathdb.statute)+
+        }
+   }
+
+div {
+  db.publishing.inlines |= cathdb.cit
+  cathdb.cit.role.attribute = attribute role { text }
+  cathdb.cit.attlist =
+      cathdb.cit.role.attribute?
+    & db.common.attributes
+    & db.common.linking.attributes
+  cathdb.cit = 
+    element cit {
+      cathdb.cit.attlist, 
+      db.all.inlines* 
+    }
+}
+
+div {
+  db.link.inlines |= cathdb.sref
+  cathdb.sref.link.attribute = (attribute osisref { text }, attribute creator { text }?)
+  cathdb.sref.attlist = 
+      cathdb.sref.link.attribute
+    & db.common.attributes
+  cathdb.sref = 
+    element sref {
+      cathdb.sref.attlist,
+      db.all.inlines*
+    }
+}
+
+div {
+  cathdb.statute.role.attribute = attribute role { text }
+  cathdb.statute.attlist =
+      cathdb.statute.role.attribute?
+    & db.common.attributes
+  cathdb.statute.info = db._info.title.onlyreq
+  cathdb.statute =
+    element statute {
+      cathdb.statute.attlist,
+      cathdb.statute.info,
+      db.all.blocks*
+    }
+}
+
+div {
+  cathdb.divisionintro.status.attribute = db.status.attribute
+  cathdb.divisionintro.role.attribute = attribute role { text }
+  cathdb.divisionintro.attlist =
+    cathdb.divisionintro.role.attribute?
+    & db.common.attributes
+    & db.common.linking.attributes
+    & db.label.attribute?
+    & cathdb.divisionintro.status.attribute?
+  cathdb.divisionintro.info = db._info
+  cathdb.divisionintro =
+    
+    ## An introduction to the contents of a part
+    element divisionintro {
+      cathdb.divisionintro.attlist,
+      cathdb.divisionintro.info,
+      db.toplevel.blocks.or.sections
+    }
+}
+cathdb.division.components = (db.navigation.components | db.components)
+
+div {
+  cathdb.division.status.attribute = db.status.attribute
+  cathdb.division.role.attribute = attribute role { text }
+  cathdb.division.attlist =
+    cathdb.division.role.attribute?
+    & db.common.attributes
+    & db.common.linking.attributes
+    & db.label.attribute?
+    & cathdb.division.status.attribute?
+  cathdb.division.info = db._info.title.req
+  cathdb.division =
+    
+    ## A division in a book
+    element division {
+      cathdb.division.attlist, cathdb.division.info, cathdb.divisionintro?, cathdb.division.components+
+    }
+}
+
+div {
+  cathdb.milestone = 
+    element milestone {
+      empty
+    }
+}

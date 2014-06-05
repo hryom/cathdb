@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://docbook.org/ns/docbook" xmlns:db="http://docbook.org/ns/docbook" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="http://docbook.org/xml/publishers/1.0/rng/publishers.rng">
+    <define name="db.publishing.inlines" combine="choice">
+      <ref name="cathdb.milestone"/>
+    </define>
+    <define name="db.toplevel.blocks.or.sections">
+      <choice>
+        <group>
+          <zeroOrMore>
+            <choice>
+              <ref name="db.all.blocks"/>
+              <ref name="cathdb.statute"/>
+            </choice>
+          </zeroOrMore>
+          <optional>
+            <ref name="db.toplevel.sections"/>
+          </optional>
+        </group>
+        <ref name="db.toplevel.sections"/>
+      </choice>
+    </define>
+    <define name="db.recursive.blocks.or.sections">
+      <choice>
+        <group>
+          <zeroOrMore>
+            <choice>
+              <ref name="db.all.blocks"/>
+              <ref name="cathdb.statute"/>
+            </choice>
+          </zeroOrMore>
+          <optional>
+            <ref name="db.recursive.sections"/>
+          </optional>
+        </group>
+        <ref name="db.recursive.sections"/>
+      </choice>
+    </define>
+    <define name="db.article">
+      <element name="article">
+        <ref name="db.article.attlist"/>
+        <ref name="db.article.info"/>
+        <zeroOrMore>
+          <choice>
+            <ref name="db.navigation.components"/>
+            <ref name="db.appendix"/>
+            <ref name="db.acknowledgements"/>
+            <ref name="db.colophon"/>
+          </choice>
+        </zeroOrMore>
+        <choice>
+          <group>
+            <zeroOrMore>
+              <choice>
+                <ref name="db.all.blocks"/>
+                <ref name="cathdb.statute"/>
+              </choice>
+            </zeroOrMore>
+            <optional>
+              <ref name="db.article.components"/>
+            </optional>
+          </group>
+          <ref name="db.article.components"/>
+        </choice>
+        <zeroOrMore>
+          <choice>
+            <ref name="db.navigation.components"/>
+            <ref name="db.appendix"/>
+            <ref name="db.acknowledgements"/>
+            <ref name="db.colophon"/>
+          </choice>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="db.part">
+      <element name="part">
+        <ref name="db.part.attlist"/>
+        <ref name="db.part.info"/>
+        <optional>
+          <ref name="db.partintro"/>
+        </optional>
+        <choice>
+          <oneOrMore>
+            <ref name="db.part.components"/>
+          </oneOrMore>
+          <group>
+            <zeroOrMore>
+              <ref name="db.part.components"/>
+            </zeroOrMore>
+            <oneOrMore>
+              <ref name="cathdb.division"/>
+            </oneOrMore>
+          </group>
+        </choice>
+      </element>
+    </define>
+    <define name="db.simplesect">
+      <element name="simplesect">
+        <ref name="db.simplesect.attlist"/>
+        <ref name="db.simplesect.info"/>
+        <oneOrMore>
+          <choice>
+            <ref name="db.all.blocks"/>
+            <ref name="cathdb.statute"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </define>
+  </include>
+  <div>
+    <define name="db.publishing.inlines" combine="choice">
+      <ref name="cathdb.cit"/>
+    </define>
+    <define name="cathdb.cit.role.attribute">
+      <attribute name="role"/>
+    </define>
+    <define name="cathdb.cit.attlist">
+      <interleave>
+        <optional>
+          <ref name="cathdb.cit.role.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+        <ref name="db.common.linking.attributes"/>
+      </interleave>
+    </define>
+    <define name="cathdb.cit">
+      <element name="cit">
+        <ref name="cathdb.cit.attlist"/>
+        <zeroOrMore>
+          <ref name="db.all.inlines"/>
+        </zeroOrMore>
+      </element>
+    </define>
+  </div>
+  <div>
+    <define name="db.link.inlines" combine="choice">
+      <ref name="cathdb.sref"/>
+    </define>
+    <define name="cathdb.sref.link.attribute">
+      <attribute name="osisref"/>
+      <optional>
+        <attribute name="creator"/>
+      </optional>
+    </define>
+    <define name="cathdb.sref.attlist">
+      <interleave>
+        <ref name="cathdb.sref.link.attribute"/>
+        <ref name="db.common.attributes"/>
+      </interleave>
+    </define>
+    <define name="cathdb.sref">
+      <element name="sref">
+        <ref name="cathdb.sref.attlist"/>
+        <zeroOrMore>
+          <ref name="db.all.inlines"/>
+        </zeroOrMore>
+      </element>
+    </define>
+  </div>
+  <div>
+    <define name="cathdb.statute.role.attribute">
+      <attribute name="role"/>
+    </define>
+    <define name="cathdb.statute.attlist">
+      <interleave>
+        <optional>
+          <ref name="cathdb.statute.role.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+      </interleave>
+    </define>
+    <define name="cathdb.statute.info">
+      <ref name="db._info.title.onlyreq"/>
+    </define>
+    <define name="cathdb.statute">
+      <element name="statute">
+        <ref name="cathdb.statute.attlist"/>
+        <ref name="cathdb.statute.info"/>
+        <zeroOrMore>
+          <ref name="db.all.blocks"/>
+        </zeroOrMore>
+      </element>
+    </define>
+  </div>
+  <div>
+    <define name="cathdb.divisionintro.status.attribute">
+      <ref name="db.status.attribute"/>
+    </define>
+    <define name="cathdb.divisionintro.role.attribute">
+      <attribute name="role"/>
+    </define>
+    <define name="cathdb.divisionintro.attlist">
+      <interleave>
+        <optional>
+          <ref name="cathdb.divisionintro.role.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+        <ref name="db.common.linking.attributes"/>
+        <optional>
+          <ref name="db.label.attribute"/>
+        </optional>
+        <optional>
+          <ref name="cathdb.divisionintro.status.attribute"/>
+        </optional>
+      </interleave>
+    </define>
+    <define name="cathdb.divisionintro.info">
+      <ref name="db._info"/>
+    </define>
+    <define name="cathdb.divisionintro">
+      <element name="divisionintro">
+        <a:documentation>An introduction to the contents of a part</a:documentation>
+        <ref name="cathdb.divisionintro.attlist"/>
+        <ref name="cathdb.divisionintro.info"/>
+        <ref name="db.toplevel.blocks.or.sections"/>
+      </element>
+    </define>
+  </div>
+  <define name="cathdb.division.components">
+    <choice>
+      <ref name="db.navigation.components"/>
+      <ref name="db.components"/>
+    </choice>
+  </define>
+  <div>
+    <define name="cathdb.division.status.attribute">
+      <ref name="db.status.attribute"/>
+    </define>
+    <define name="cathdb.division.role.attribute">
+      <attribute name="role"/>
+    </define>
+    <define name="cathdb.division.attlist">
+      <interleave>
+        <optional>
+          <ref name="cathdb.division.role.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+        <ref name="db.common.linking.attributes"/>
+        <optional>
+          <ref name="db.label.attribute"/>
+        </optional>
+        <optional>
+          <ref name="cathdb.division.status.attribute"/>
+        </optional>
+      </interleave>
+    </define>
+    <define name="cathdb.division.info">
+      <ref name="db._info.title.req"/>
+    </define>
+    <define name="cathdb.division">
+      <element name="division">
+        <a:documentation>A division in a book</a:documentation>
+        <ref name="cathdb.division.attlist"/>
+        <ref name="cathdb.division.info"/>
+        <optional>
+          <ref name="cathdb.divisionintro"/>
+        </optional>
+        <oneOrMore>
+          <ref name="cathdb.division.components"/>
+        </oneOrMore>
+      </element>
+    </define>
+  </div>
+  <div>
+    <define name="cathdb.milestone">
+      <element name="milestone">
+        <empty/>
+      </element>
+    </define>
+  </div>
+</grammar>
