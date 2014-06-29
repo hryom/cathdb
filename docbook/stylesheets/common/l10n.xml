@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
+  <l:l10n language="da">
+    <l:gentext key="Appendix" text=""/>
+    <l:gentext key="appendix" text=""/>
+    <l:gentext key="Division" text="Sektion"/>
+    <l:gentext key="division" text="sektion"/>
+    <l:context name="title">
+      <l:template name="appendix" text="%n. %t"/>
+      <l:template name="chapter" text="%n. %t"/>
+      <l:template name="colophon" text=""/>
+      <l:template name="division" text="%n. %t"/>
+      <l:template name="part" text="%n. %t"/>
+      <l:template name="statute" text="%t"/>
+    </l:context>
+    <l:context name="title-numbered">
+      <l:template name="appendix" text="%n. %t"/>
+      <l:template name="chapter" text="%n. %t"/>
+      <l:template name="division" text="%n. %t"/>
+      <l:template name="part" text="%n. %t"/>
+    </l:context>
+    <l:context name="title-unnumbered">
+      <l:template name="appendix" text="%n %t"/>
+      <l:template name="chapter" text="%n %t"/>
+      <l:template name="division" text="%n %t"/>
+      <l:template name="part" text="%n %t"/>
+    </l:context>
+  </l:l10n>
+</l:i18n>
