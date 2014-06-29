@@ -11,11 +11,21 @@
   </pattern>
 
   <pattern>
-    <rule context="db:statute[count(preceding::db:statute) = 0]">
+    <rule context="db:statute[not(ancestor::db:appendix)][count(preceding::db:statute[not(ancestor::db:appendix)]) = 0]">
       <assert test="number(db:info/db:title) = 1">The first statute in a document should have # 1</assert>
     </rule>
-    <rule context="db:statute[count(preceding::db:statute) &gt; 0]">
+    <rule context="db:statute[not(ancestor::db:appendix)][count(preceding::db:statute[not(ancestor::db:appendix)]) &gt; 0]">
+      <assert test="number(db:info/db:title) = number(preceding::db:statute[1]/db:info/db:title) + 1">The number of a statute should be equal to the number of the previous statute + 1</assert>
+    </rule>
+  </pattern> 
+  
+  <pattern>
+    <rule context="db:statute[ancestor::db:appendix][count(preceding::db:statute[ancestor::db:appendix]) = 0]">
+      <assert test="number(db:info/db:title) = 1">The first statute in a document should have # 1</assert>
+    </rule>
+    <rule context="db:statute[ancestor::db:appendix][count(preceding::db:statute[ancestor::db:appendix]) &gt; 0]">
       <assert test="number(db:info/db:title) = number(preceding::db:statute[1]/db:info/db:title) + 1">The number of a statute should be equal to the number of the previous statute + 1</assert>
     </rule>
   </pattern>  
+  
 </schema>
