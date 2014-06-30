@@ -7,7 +7,7 @@
   <xsl:import href="http://docbook.sourceforge.net/release/xsl-ns/1.78.1/html/docbook.xsl"/>
   
   <xsl:include href="param.xsl"/>
-  <xsl:include href="../common/label.xsl"/>
+  <xsl:include href="../common/labels.xsl"/>
   <xsl:include href="autotoc.xsl"/>
   <xsl:include href="block.xsl"/>
   <xsl:include href="component.xsl"/>
