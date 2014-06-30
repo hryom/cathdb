@@ -59,11 +59,7 @@
                 <xsl:with-param name="context" select="$this.node"/>
               </xsl:call-template>
             </xsl:attribute>
-            <xsl:if test="@label != ''">
-              <xsl:apply-templates select="." mode="label.markup"/>
-              <xsl:text>. </xsl:text>
-            </xsl:if>
-            <xsl:apply-templates select="." mode="title.markup">
+            <xsl:apply-templates select="." mode="object.title.markup">
               <xsl:with-param name="allow-anchors" select="1"/>
             </xsl:apply-templates>
           </a>

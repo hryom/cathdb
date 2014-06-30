@@ -20,10 +20,11 @@
       <l:template name="part" text="%n. %t"/>
     </l:context>
     <l:context name="title-unnumbered">
-      <l:template name="appendix" text="%n %t"/>
-      <l:template name="chapter" text="%n %t"/>
-      <l:template name="division" text="%n %t"/>
-      <l:template name="part" text="%n %t"/>
+      <l:template name="appendix" text="%n. %t"/>
+      <l:template name="chapter" text="%n. %t"/>
+      <l:template name="colophon" text=""/>
+      <l:template name="division" text="%n. %t"/>
+      <l:template name="part" text="%n. %t"/>
     </l:context>
   </l:l10n>
 </l:i18n>

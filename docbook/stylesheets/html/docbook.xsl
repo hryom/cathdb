@@ -8,6 +8,7 @@
   
   <xsl:include href="param.xsl"/>
   <xsl:include href="../common/labels.xsl"/>
+  <xsl:include href="../common/gentext.xsl"/>
   <xsl:include href="autotoc.xsl"/>
   <xsl:include href="block.xsl"/>
   <xsl:include href="component.xsl"/>
