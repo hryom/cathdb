@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<article xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Using DocBook for eccleciastical documents</title>
+        <author>
+  <personname><firstname>Henrik</firstname><surname>Ryom</surname></personname>
+          <email>henrik.ryom@gmail.com</email>
+        </author>
+      <abstract>
+        <para>This is an attempt to use DocBook - or customized DocBook - for eccleciastical documents.</para>
+      </abstract>
+    </info>
+    <section>
+        <title>Introduction</title>
+        <para>Using DocBook for documents which hasn't technical caracter </para>
+        <para>using publisher</para>
+        <para>New element statute</para>
+      <para>New element division</para>
+      <para>new link element sref</para>
+      <para>using set as super-book structure (filesystem)</para>
+    </section>
+</article>

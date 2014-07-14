@@ -1,5 +1,8 @@
 #!/bin/bash
-docs=( SC IM LG OE UR CD ) 
+docs=( SC IM LG OE UR CD OT PC GE NA DV AA GS PO AG DH ) 
+if test $# -gt 0; then
+    docs=( $@ )
+fi
 for f in "${docs[@]}"; do
     ./saxon documents/eccdocs/councils/vaticanii/$f.xml stylesheets/html/chunk.xsl collect.xref.targets=yes targets.filename=documents/eccdocs/councils/vaticanii/$f.targets.db target.database.document=/home/henrik/git/cathdb/docbook/documents/targetdatabase.xml  base.dir=output/eccdoc/councils/vaticanvii/$f 
 done
