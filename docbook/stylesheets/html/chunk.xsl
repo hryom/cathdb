@@ -26,20 +26,32 @@
   <xsl:template name="breadcrumbs">
     <xsl:param name="this.node" select="."/>
     <div class="breadcrumbs">
-      <xsl:for-each select="$this.node/ancestor::*">
-        <span class="breadcrumb-link">
-          <a>
-            <xsl:attribute name="href">
-              <xsl:call-template name="href.target">
-                <xsl:with-param name="object" select="."/>
-                <xsl:with-param name="context" select="$this.node"/>
-              </xsl:call-template>
-            </xsl:attribute>
-            <xsl:apply-templates select="." mode="title.markup"/>
-          </a>
-        </span>
-        <xsl:text> &gt; </xsl:text>
-      </xsl:for-each>
+      <xsl:choose>
+        <xsl:when test="local-name() = 'set'">
+          <xsl:for-each select="$this.node/ancestor::*">
+            <span class="breadcrumb-link">
+              <xsl:apply-templates select="." mode="title.markup"/>
+            </span>  
+            <xsl:text> &gt; </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:for-each select="$this.node/ancestor::*[local-name() != 'set']">
+            <span class="breadcrumb-link">
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:call-template name="href.target">
+                    <xsl:with-param name="object" select="."/>
+                    <xsl:with-param name="context" select="$this.node"/>
+                  </xsl:call-template>
+                </xsl:attribute>
+                <xsl:apply-templates select="." mode="title.markup"/>
+              </a>
+            </span>
+            <xsl:text> &gt; </xsl:text>
+          </xsl:for-each>
+        </xsl:otherwise>
+      </xsl:choose>
       <!-- And display the current node, but not as a link -->
       <span class="breadcrumb-node">
         <xsl:apply-templates select="$this.node" mode="title.markup"/>
@@ -50,7 +62,7 @@
   <xsl:template name="minitoc">
     <xsl:param name="this.node" select="."/>
     <div class="minitoc">
-      <xsl:for-each select="d:part|d:division|d:chapter|d:preface|d:appendix|d:article|d:section[d:section[@conformance='in-brief']]">
+      <xsl:for-each select="d:book|d:part|d:division|d:chapter|d:preface|d:appendix|d:article|d:section[d:section[@conformance='in-brief']]">
         <div class="minitoc-link">
           <a>
             <xsl:attribute name="href">
@@ -75,9 +87,7 @@
   </xsl:template>
   
   <xsl:template name="user.footer.content">
-    <xsl:if test="$onechunk = '0'">
-      <xsl:call-template name="minitoc"/>
-    </xsl:if>
+    <xsl:call-template name="minitoc"/>
   </xsl:template>
   
 </xsl:stylesheet>

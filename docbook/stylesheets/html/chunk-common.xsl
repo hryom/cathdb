@@ -519,7 +519,7 @@
         <xsl:variable name="next" select="key('genid', ($nextdiv/@id|$nextdiv/@xml:id)[1])"/>
         
         <xsl:choose>
-          <xsl:when test="$onechunk != 0 and parent::*">
+          <xsl:when test="($onechunk != 0 or (local-name() = 'set')) and parent::*">
             <xsl:copy-of select="$content"/>
           </xsl:when>
           <xsl:otherwise>
@@ -533,12 +533,12 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="$onechunk != 0 and not(parent::*)">
+          <xsl:when test="($onechunk != 0 or (local-name() = 'set')) and not(parent::*)">
             <xsl:call-template name="chunk-all-sections">
               <xsl:with-param name="content" select="$content"/>
             </xsl:call-template>
           </xsl:when>
-          <xsl:when test="$onechunk != 0">
+          <xsl:when test="($onechunk != 0 or (local-name() = 'set'))">
             <xsl:copy-of select="$content"/>
           </xsl:when>
           <xsl:when test="$chunk.first.sections = 0">

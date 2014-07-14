@@ -430,7 +430,22 @@
     |d:book/d:glossary|d:article/d:glossary|d:part/d:glossary
     |d:book/d:bibliography|d:article/d:bibliography|d:part/d:bibliography
     |d:colophon" priority="1">
-   <xsl:choose>
+    <xsl:choose>
+      <xsl:when test="local-name() = 'set' and not(d:set)">
+        <div class="toccollection">
+          <ul>
+            <li class="toctitle">
+              <xsl:call-template name="breadcrumbs"/>
+            </li>
+            <li class="tocitems">
+              <ul>
+                <xsl:call-template name="minitoc"/>
+              </ul>
+            </li>
+            <xsl:apply-imports/>
+          </ul>
+        </div>
+      </xsl:when>
       <xsl:when test="$onechunk != 0 and parent::*">
         <xsl:apply-imports/>
       </xsl:when>

@@ -13,7 +13,6 @@
   <xsl:param name="generate.toc">
     article toc,title
     book    toc,title
-    set     toc,title
   </xsl:param>
   <xsl:param name="html.stylesheet" select="'../css/cathdb.css ../css/eccdoc.css'"/>
   <xsl:param name="local.l10n.xml" select="document('../common/l10n.xml')"/>

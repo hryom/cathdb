@@ -3,6 +3,69 @@
 
 <!-- This stylesheet was created by template/titlepage.xsl; do not edit it by hand. -->
 
+<xsl:template name="set.titlepage.recto">
+</xsl:template>
+
+<xsl:template name="set.titlepage.verso">
+</xsl:template>
+
+<xsl:template name="set.titlepage.separator">
+</xsl:template>
+
+<xsl:template name="set.titlepage.before.recto">
+</xsl:template>
+
+<xsl:template name="set.titlepage.before.verso">
+</xsl:template>
+
+<xsl:template name="set.titlepage">
+  <div class="titlepage">
+    <xsl:variable name="recto.content">
+      <xsl:call-template name="set.titlepage.before.recto"/>
+      <xsl:call-template name="set.titlepage.recto"/>
+    </xsl:variable>
+    <xsl:variable name="recto.elements.count">
+      <xsl:choose>
+        <xsl:when test="function-available('exsl:node-set')"><xsl:value-of select="count(exsl:node-set($recto.content)/*)"/></xsl:when>
+        <xsl:when test="contains(system-property('xsl:vendor'), 'Apache Software Foundation')">
+          <!--Xalan quirk--><xsl:value-of select="count(exsl:node-set($recto.content)/*)"/></xsl:when>
+        <xsl:otherwise>1</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="(normalize-space($recto.content) != '') or ($recto.elements.count &gt; 0)">
+      <div><xsl:copy-of select="$recto.content"/></div>
+    </xsl:if>
+    <xsl:variable name="verso.content">
+      <xsl:call-template name="set.titlepage.before.verso"/>
+      <xsl:call-template name="set.titlepage.verso"/>
+    </xsl:variable>
+    <xsl:variable name="verso.elements.count">
+      <xsl:choose>
+        <xsl:when test="function-available('exsl:node-set')"><xsl:value-of select="count(exsl:node-set($verso.content)/*)"/></xsl:when>
+        <xsl:when test="contains(system-property('xsl:vendor'), 'Apache Software Foundation')">
+          <!--Xalan quirk--><xsl:value-of select="count(exsl:node-set($verso.content)/*)"/></xsl:when>
+        <xsl:otherwise>1</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="(normalize-space($verso.content) != '') or ($verso.elements.count &gt; 0)">
+      <div><xsl:copy-of select="$verso.content"/></div>
+    </xsl:if>
+    <xsl:call-template name="set.titlepage.separator"/>
+  </div>
+</xsl:template>
+
+<xsl:template match="*" mode="set.titlepage.recto.mode">
+  <!-- if an element isn't found in this mode, -->
+  <!-- try the generic titlepage.mode -->
+  <xsl:apply-templates select="." mode="titlepage.mode"/>
+</xsl:template>
+
+<xsl:template match="*" mode="set.titlepage.verso.mode">
+  <!-- if an element isn't found in this mode, -->
+  <!-- try the generic titlepage.mode -->
+  <xsl:apply-templates select="." mode="titlepage.mode"/>
+</xsl:template>
+
 <xsl:template name="book.titlepage.recto">
   <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="d:bookinfo/d:cover"/>
   <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="d:info/d:cover"/>
