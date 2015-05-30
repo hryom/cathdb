@@ -3,7 +3,7 @@
   xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
   <namespace ns="http://docbook.org/ns/docbook">
     <validate schema="cathdb.rng"/>
-    <validate schema="http://docbook.org/xml/publishers/1.0/sch/publishers.sch"/>
+    <validate schema="publishers.sch"/>
     <validate schema="cathdb.sch"/>
   </namespace>
 </rules>

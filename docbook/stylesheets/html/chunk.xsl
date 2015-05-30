@@ -18,9 +18,7 @@
   <!-- ==================================================================== -->
   
   <xsl:import href="docbook.xsl"/>
-  <xsl:import href="http://docbook.sourceforge.net/release/xsl-ns/1.78.1/html/chunk-common.xsl"/>
   <xsl:import href="chunk-common.xsl"/>
-  <xsl:include href="http://docbook.sourceforge.net/release/xsl-ns/1.78.1/html/chunk-code.xsl"/>
   <xsl:include href="chunk-code.xsl"/>
   
   <xsl:template name="breadcrumbs">

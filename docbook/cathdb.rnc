@@ -1,8 +1,9 @@
 default namespace db = "http://docbook.org/ns/docbook"
 
-include "http://docbook.org/xml/publishers/1.0/rng/publishers.rnc"
+#include "http://docbook.org/xml/publishers/1.0/rng/publishers.rnc"
+include "publishers.rnc"
    {
-      db.publishing.inlines |= cathdb.milestone
+      db.publishing.inlines |= (cathdb.milestone | db.sidebar)*
 
       db.toplevel.blocks.or.sections =
          ((db.all.blocks | cathdb.statute)*, db.toplevel.sections?) | db.toplevel.sections

@@ -17,6 +17,8 @@
     
     ******************************************************************** -->
   
+  <xsl:import href="http://docbook.sourceforge.net/release/xsl-ns/1.78.1/html/chunk-common.xsl"/>
+  
   <xsl:template name="chunk-first-section-with-parent">
     <xsl:param name="content">
       <xsl:apply-imports/>

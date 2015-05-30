@@ -20,6 +20,7 @@
   
   <!-- ==================================================================== -->
   
+  <xsl:include href="http://docbook.sourceforge.net/release/xsl-ns/1.78.1/html/chunk-code.xsl"/>
   
   <xsl:template match="*" mode="chunk-filename" priority="1">
     <!-- returns the filename of a chunk -->
